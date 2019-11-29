@@ -12,7 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +25,7 @@ public class ConverterController {
   @Autowired
   private ConverterService converterService;
 
-  @PostMapping
+  @GetMapping
   @ApiOperation(value = "Convert Number", notes = "Number conversor to words")
   @ApiResponses(value = { @ApiResponse(code = 200, message = "Converted.") })
   @ResponseStatus(value = HttpStatus.OK)
