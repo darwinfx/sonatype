@@ -13,19 +13,19 @@ public abstract class Tranformable {
     String strLessThanNineteen = "";
 
     if (number % 100 < 20) {
-      numberName.append(Relations.LESS_THAN_NINETEEN.get(number % 100));
+      numberName.append(Relations.getFromLessThanNineteen(number % 100));
       number /= 100;
     } else {
-      strLessThanNineteen = Relations.LESS_THAN_NINETEEN.get(number % 10);
+      strLessThanNineteen = Relations.getFromLessThanNineteen(number % 10);
       number /= 10;
 
-      numberName.append(AND).append(Relations.LESS_THAN_THOUSAND.get(number % 10)).append(strLessThanNineteen);
+      numberName.append(AND).append(Relations.getFromLessThanThousand(number % 10)).append(strLessThanNineteen);
       number /= 10;
     }
     if (number == 0) {
       return numberName;
     }
-    return numberName.insert(0, HUNDRED).insert(0, Relations.LESS_THAN_NINETEEN.get(number));
+    return numberName.insert(0, HUNDRED).insert(0, Relations.getFromLessThanNineteen(number));
   }
 
   public abstract StringBuilder transform();

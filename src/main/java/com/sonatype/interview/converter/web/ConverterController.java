@@ -2,7 +2,7 @@ package com.sonatype.interview.converter.web;
 
 import com.sonatype.interview.converter.service.ConverterService;
 import com.sonatype.interview.converter.web.model.ConverterResponse;
-import com.sonatype.interview.converter.web.shared.web.ResponseBody;
+import com.sonatype.interview.shared.web.web.ResponseBody;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

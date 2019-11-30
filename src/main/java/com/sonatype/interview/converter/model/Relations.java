@@ -1,15 +1,15 @@
 package com.sonatype.interview.converter.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Relations {
 
-  public static final List<String> LESS_THAN_NINETEEN;
-  public static final List<String> LESS_THAN_THOUSAND;
+  private static final List<String> LESS_THAN_NINETEEN;
+  private static final List<String> LESS_THAN_THOUSAND;
 
   static {
     LESS_THAN_NINETEEN = new ArrayList<>();
@@ -47,6 +47,14 @@ public class Relations {
     LESS_THAN_THOUSAND.add("seventy ");
     LESS_THAN_THOUSAND.add("eighty ");
     LESS_THAN_THOUSAND.add("ninety ");
+  }
+
+  public static String getFromLessThanNineteen(int position) {
+    return LESS_THAN_NINETEEN.get(position);
+  }
+
+  public static String getFromLessThanThousand(int position) {
+    return LESS_THAN_THOUSAND.get(position);
   }
 
 }

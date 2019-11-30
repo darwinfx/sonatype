@@ -1,11 +1,8 @@
 package com.sonatype.interview.converter.web;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
 import com.sonatype.interview.converter.service.ConverterServiceImpl;
 import com.sonatype.interview.converter.web.model.ConverterResponse;
-import com.sonatype.interview.converter.web.shared.web.ResponseBody;
+import com.sonatype.interview.shared.web.web.ResponseBody;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConverterControllerTest {

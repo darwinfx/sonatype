@@ -1,4 +1,4 @@
-package com.sonatype.interview.converter.web.shared.web;
+package com.sonatype.interview.shared.web.web;
 
 import lombok.Generated;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Generated
 @Getter
 @NoArgsConstructor
-public final class ResponseBody<T> implements Serializable {
+public final class ResponseBody<T extends Serializable> implements Serializable {
   /**
    * Serial UUID.
    */
@@ -32,11 +32,11 @@ public final class ResponseBody<T> implements Serializable {
     this.message = message;
   }
 
-  public static <E> ResponseBody<E> ok(E object) {
+  public static <E extends Serializable> ResponseBody<E> ok(E object) {
     return new ResponseBody<>(object, HttpStatus.OK);
   }
 
-  public static <E> ResponseBody<E> fromObject(E object, HttpStatus status, String message) {
+  public static <E extends Serializable> ResponseBody<E> fromObject(E object, HttpStatus status, String message) {
     return new ResponseBody<>(object, status, message);
   }
 

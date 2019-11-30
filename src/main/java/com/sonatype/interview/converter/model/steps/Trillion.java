@@ -4,10 +4,10 @@ import java.text.DecimalFormat;
 
 public class Trillion extends Million {
 
-  private static final String BILLION = " trillion ";
+  private static final String TYPE = " trillion ";
 
   public Trillion(Long number) {
-    super(number, BILLION);
+    super(number, TYPE);
     DecimalFormat df = new DecimalFormat(MASK);
     String strNumber = df.format(number);
     this.number = Integer.parseInt(strNumber.substring(0, 3));

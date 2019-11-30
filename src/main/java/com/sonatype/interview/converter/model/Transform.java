@@ -7,6 +7,7 @@ import com.sonatype.interview.converter.model.steps.Thousand;
 import com.sonatype.interview.converter.model.steps.Tranformable;
 import com.sonatype.interview.converter.model.steps.Trillion;
 import com.sonatype.interview.exceptions.OutOfRangeException;
+import com.sonatype.interview.shared.Range;
 import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,9 +17,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Transform {
-  private static List<Tranformable> transformSteps;
-  private static final Long maxValue = 999999999999999L;
-  private static final Long minValue = -999999999999999L;
   private static final String DECIMAL_SIMBOL = ",";
   private static final String AND_WORD = " and ";
   private static final String WHITE_SPACE = " ";
@@ -26,6 +24,9 @@ public class Transform {
   private static String prefix;
 
   private static Long number;
+
+  private Transform() {
+  }
 
   public static String transformNumber(String strNumber) {
     prefix = "";
@@ -36,21 +37,21 @@ public class Transform {
       return "Zero";
     }
 
-    transformSteps = new ArrayList<>();
+    List<Tranformable> transformSteps = new ArrayList<>();
     transformSteps.add(new Trillion(number));
     transformSteps.add(new Billion(number));
     transformSteps.add(new Million(number));
     transformSteps.add(new HundredThousand(number));
     transformSteps.add(new Thousand(number));
 
-    String numberName = transformSteps.stream().map(t -> t.transform()).collect(Collectors.joining());
+    String numberName = transformSteps.stream().map(Tranformable::transform).collect(Collectors.joining());
     return cleanNumberName(prefix + numberName);
   }
 
   private static void validateNumber(String strNumber) {
     AtomicInteger i = new AtomicInteger(1);
     Stream<String> decimalNumbers = Arrays.stream((" " + strNumber + " ").split(DECIMAL_SIMBOL));
-    Boolean wrongDecimaNumbers = decimalNumbers.anyMatch(str -> {
+    boolean wrongDecimaNumbers = decimalNumbers.anyMatch(str -> {
       if (i.get() == 1) {
         i.incrementAndGet();
         return false;
@@ -71,7 +72,7 @@ public class Transform {
       prefix = "Negative ";
     }
 
-    if (number < minValue || number > maxValue) {
+    if (number < Range.MIN.getValue() || number > Range.MAX.getValue()) {
       throw new OutOfRangeException("Value out of range, -999.999.999.999.999 < value > 999.999.999.999.999");
     }
 
