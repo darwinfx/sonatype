@@ -1,9 +1,8 @@
 package com.sonatype.interview.converter.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TransformTest {
 
@@ -32,12 +31,17 @@ public class TransformTest {
   @Test
   public void whenWrongDecimalSimbolPosition_thenNumberFormatException() {
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber("1,000,00"));
+    Assertions.assertThrows(NumberFormatException.class, () -> Transform.transformNumber("--1,000,000"));
+    Assertions.assertThrows(NumberFormatException.class, () -> Transform.transformNumber("-1,000,000-"));
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber("1,000,0000"));
+    Assertions.assertThrows(NumberFormatException.class, () -> Transform.transformNumber("-1,000,0000"));
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber(",1,000,00"));
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber("1,0"));
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber("1,"));
+    Assertions.assertThrows(NumberFormatException.class, () -> Transform.transformNumber("-1,"));
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber(",1"));
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber("1,000,"));
+    Assertions.assertThrows(NumberFormatException.class, () -> Transform.transformNumber("-1,000,"));
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber("00000,07,000,000"));
   }
 }

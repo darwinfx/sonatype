@@ -19,6 +19,7 @@ public class ConverterServiceImplTest {
   public void processNumber() {
     when(converterService.processNumber(ArgumentMatchers.any())).thenCallRealMethod();
     assertEquals("one", converterService.processNumber("00000000001"));
+    assertEquals("Negative one", converterService.processNumber("-00000000001"));
     assertEquals("one hundred twenty three billion one hundred twenty three million one hundred twenty "
         + "three thousand one hundred and twenty three", converterService.processNumber("123123123123"));
     assertEquals("one thousand and twenty three", converterService.processNumber("0001023"));
@@ -32,5 +33,10 @@ public class ConverterServiceImplTest {
         converterService.processNumber("897123723"));
     assertEquals("nine hundred eighty seven million six hundred fifty four thousand three hundred and twenty one",
         converterService.processNumber("0987654321"));
+    assertEquals("Negative nine hundred eighty seven million six hundred fifty four thousand three hundred and twenty "
+            + "one",
+        converterService.processNumber("-0987654321"));
+    assertEquals("Negative one hundred eleven million one hundred eleven thousand one hundred eleven",
+        converterService.processNumber("-111111111"));
   }
 }

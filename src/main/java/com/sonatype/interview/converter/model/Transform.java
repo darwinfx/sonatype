@@ -7,40 +7,44 @@ import com.sonatype.interview.converter.model.steps.Thousand;
 import com.sonatype.interview.converter.model.steps.Tranformable;
 import com.sonatype.interview.converter.model.steps.Trillion;
 import com.sonatype.interview.exceptions.OutOfRangeException;
+import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.springframework.util.StringUtils;
 
 public class Transform {
   private static List<Tranformable> transformSteps;
   private static final Long maxValue = 999999999999999L;
+  private static final Long minValue = -999999999999999L;
   private static final String DECIMAL_SIMBOL = ",";
   private static final String AND_WORD = " and ";
   private static final String WHITE_SPACE = " ";
   private static final String EMPTY_SPACE = "";
+  private static String prefix;
 
   private static Long number;
 
   public static String transformNumber(String strNumber) {
+    prefix = "";
+
     validateNumber(strNumber);
-    if (maxValue < number) {
-      throw new OutOfRangeException("Value out of range, max possible value 1 Trillion: 999.999.999.999.999");
-    }
+
     if (number == 0) {
       return "Zero";
     }
+
     transformSteps = new ArrayList<>();
     transformSteps.add(new Trillion(number));
     transformSteps.add(new Billion(number));
     transformSteps.add(new Million(number));
     transformSteps.add(new HundredThousand(number));
     transformSteps.add(new Thousand(number));
+
     String numberName = transformSteps.stream().map(t -> t.transform()).collect(Collectors.joining());
-    return cleanNumberName(numberName);
+    return cleanNumberName(prefix + numberName);
   }
 
   private static void validateNumber(String strNumber) {
@@ -61,6 +65,16 @@ public class Transform {
     strNumber = strNumber.replace(DECIMAL_SIMBOL, EMPTY_SPACE);
 
     number = new Long(strNumber);
+
+    if (number < 0) {
+      number = Math.abs(number);
+      prefix = "Negative ";
+    }
+
+    if (number < minValue || number > maxValue) {
+      throw new OutOfRangeException("Value out of range, -999.999.999.999.999 < value > 999.999.999.999.999");
+    }
+
   }
 
   private static String cleanNumberName(String numberName) {
