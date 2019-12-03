@@ -11,16 +11,39 @@ class App extends Component {
   convertNumber = (event) => {
     if (event.target.value !== "") {
       fetch('http://localhost:8080/converter?value=' + event.target.value)
-        .then(res => res.json())
+        .then((res) => {
+          console.log(res)
+          return res.json()
+        })
         .then((data) => {
           console.log(data);
           this.setState({ response: data });
           this.numberNameElement.current.updateState(data);
+        }).catch((error) => {
+          this.numberNameElement.current.updateState(this.getServerConnectionFailureMsg())
         })
-        .catch(console.log)
     } else {
-      this.numberNameElement.current.updateState({result:{word:"Insert a number please"}})
+      this.numberNameElement.current.updateState({ result: { word: "Insert a number please" } })
     }
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:8080/converter?value=1')
+      .then((res) => {
+        console.log(res)
+        return res.json()
+      })
+      .then((data) => {
+        console.log(data);
+        this.setState({ response: data });
+        this.numberNameElement.current.updateState(data);
+      }).catch((error) => {
+        this.numberNameElement.current.updateState(this.getServerConnectionFailureMsg())
+      })
+  }
+
+  getServerConnectionFailureMsg(){
+    return { message: "Server Connection Failure, please check if the server is up." , status: "NOT_ACCEPTABLE" };
   }
 
   render() {
