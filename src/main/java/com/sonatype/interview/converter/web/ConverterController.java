@@ -1,5 +1,6 @@
 package com.sonatype.interview.converter.web;
 
+import com.sonatype.interview.converter.model.Number;
 import com.sonatype.interview.converter.service.ConverterService;
 import com.sonatype.interview.converter.web.model.ConverterResponse;
 import com.sonatype.interview.shared.web.web.ResponseBody;
@@ -31,8 +32,7 @@ public class ConverterController {
   @ResponseStatus(value = HttpStatus.OK)
   @CrossOrigin(exposedHeaders = { HttpHeaders.LOCATION })
   public ResponseBody<ConverterResponse> create(String value) {
-    ConverterResponse converterResponse = ConverterResponse.builder().value(value)
-        .word(converterService.processNumber(value)).build();
+    ConverterResponse converterResponse = converterService.processNumber(new Number(value));
     return ResponseBody.ok(converterResponse);
   }
 }

@@ -2,7 +2,7 @@ package com.sonatype.interview.converter.model.steps;
 
 import java.text.DecimalFormat;
 
-public class Thousand extends Tranformable {
+public class Thousand extends Transformable {
 
   private Integer number;
 

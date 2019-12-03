@@ -1,5 +1,6 @@
 package com.sonatype.interview.converter.web.model;
 
+import com.sonatype.interview.converter.model.Number;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,4 +21,8 @@ public class ConverterResponse implements Serializable {
 
   private String value;
   private String word;
+
+  public static ConverterResponse fromModel(Number number) {
+    return ConverterResponse.builder().value(number.getValue().toString()).word(number.getStrNumber()).build();
+  }
 }

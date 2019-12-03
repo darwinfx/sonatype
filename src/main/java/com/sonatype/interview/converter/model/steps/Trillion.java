@@ -1,5 +1,6 @@
 package com.sonatype.interview.converter.model.steps;
 
+import com.sonatype.interview.converter.model.Number;
 import java.text.DecimalFormat;
 
 public class Trillion extends Million {

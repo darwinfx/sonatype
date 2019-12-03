@@ -24,8 +24,8 @@ public class TransformTest {
     assertEquals("twenty thousand ", Transform.transformNumber("0000020000"));
     assertEquals("four million four", Transform.transformNumber("4000004"));
 
-    assertEquals("one million ", Transform.transformNumber("1,000,000"));
-    assertEquals("seven million ", Transform.transformNumber("0000007,000,000"));
+    assertEquals("one million ", Transform.transformNumber("1000000"));
+    assertEquals("seven million ", Transform.transformNumber("0000007000000"));
   }
 
   @Test
@@ -43,5 +43,6 @@ public class TransformTest {
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber("1,000,"));
     Assertions.assertThrows(NumberFormatException.class, () -> Transform.transformNumber("-1,000,"));
     Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber("00000,07,000,000"));
+    Assertions.assertThrows(NumberFormatException.class,  () -> Transform.transformNumber(",100,000"));
   }
 }

@@ -2,7 +2,7 @@ package com.sonatype.interview.converter.model.steps;
 
 import java.text.DecimalFormat;
 
-public class Million extends Tranformable {
+public class Million extends Transformable {
 
   private String type = " million ";
   protected Integer number;
