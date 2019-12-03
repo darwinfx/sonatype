@@ -16,6 +16,22 @@ Swagger API is used to make request to the application.
 
 http://localhost:8080/swagger-ui.html#!/Converter/createUsingGET
 
+Or you can use the Custom UI.
+
+npm is needed.
+
+```bash
+
+- Go to folder ui/sonatype-ui/ and excecute: npm install
+- after few seconds:
+- excecute: npm start
+
+PLEASE REMEMBER: The Backend application must be running first.
+
+```
+
+http://localhost:3000
+
 ## Application Boundaries
 #####Number Range
 ```bash
